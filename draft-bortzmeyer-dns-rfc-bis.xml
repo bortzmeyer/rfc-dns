@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY rfc1034 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1034.xml">
+<!ENTITY rfc1035 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1035.xml">
+<!ENTITY rfc2119 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY rfc2181 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.2181.xml">
+<!ENTITY rfc2606 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.2606.xml">
+<!ENTITY rfc7816 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7816.xml">
+<!ENTITY rfc8020 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.8020.xml">
+<!ENTITY I-D.ietf-dnsop-terminology-bis SYSTEM
+"http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dnsop-terminology-bis.xml">
+]>
+<rfc docName="draft-bortzmeyer-dns-rfc-bis-00-BETA"
+     category="std" ipr="trust200902">
+<?rfc toc="yes"?>
+<?rfc strict="yes"?>
+<front>
+<title abbrev="DNS RFC bis">New versions of the base DNS RFCs</title>
+<author fullname="Stephane Bortzmeyer" initials="S." surname="Bortzmeyer">
+<organization>AFNIC</organization>
+<address><postal><street>1, rue Stephenson</street><code>78180</code><city>Montigny-le-Bretonneux</city><country>France</country></postal> <phone>+33 1 39 30 83 46</phone><email>bortzmeyer+ietf@nic.fr</email><uri>http://www.afnic.fr/</uri></address>
+</author>
+<date month="TODO" year="TODO"/>
+<workgroup>Individual</workgroup>
+<abstract>
+  <t>This document describes the project to update the base DNS RFCs
+with new and up-to-date documents. It describes the goal, the method
+and the main choices. The RFC-bis documents themselves are separate
+documents, not yet published.</t>
+  <t>It is not intended to be published as a RFC.</t>
+<t>REMOVE BEFORE PUBLICATION: this document should be discussed in the
+IETF DNSOP group, through its mailing list, as long as there is no
+chartered working group for this project. The
+source of the document, as well as a list of open issues, is currently
+kept <eref
+target="https://github.com/bortzmeyer/rfc-dns">at Github</eref>.</t>
+</abstract>
+</front>
+
+<middle>
+  <section anchor="intro" title="Introduction and background">
+    <t>The DNS protocol (<xref
+    target="RFC1034"/>, <xref
+    target="RFC1035"/>) is a serious challenge to every implementer or
+    to every engineer who tries to understand it from the reference
+    RFCs. The official standards are very old (almost twenty years),
+    ambiguous on many things, and sometimes obsolete. Both the
+    concepts and the terminology have changed a lot since 1987.</t>
+    <t>Someone who wants to understand the "official" DNS today has to
+    read not only these official RFCs but also several others that
+    update, patch or precise some aspects of the DNS. This is hardly a
+    satisfying state for a protocol which is so critical. For
+    instance, it allows bad faith actors to have broken name servers,
+    while claiming to be compliant.</t>
+    <t>Other old protocols managed to consolidate the various
+    documents in a recent set of documents, giving the protocol a
+    solid and modern specification. This is the case with SMTP (<xref
+    target="RFC5321"/>), the Internet Message Format (<xref
+    target="RFC5322"/>) and HTTP (<xref target="RFC7230"/> and
+    friends). It is time to do the same for the DNS.</t>
+    <t>The goal is therefore to produce two documents, 1034-bis and 1035-bis which will
+      obsolete <xref target="RFC1034"/> and <xref target="RFC1035"/>,
+      as well as the various RFCs that patch them (such as <xref
+      target="RFC2181"/>, <xref target="RFC7766"/> or <xref target="RFC8020"/>).</t>
+     <t>The process is not expected to be an easy or a fast one, it
+      will probably last several years.</t>
+    <t>The charter of the DNSOP working group<!--  &I-D.ietf-dnsop-terminology-bis;
+    https://datatracker.ietf.org/wg/dnsop/charter/ -->, in force at
+    the time of this draft, does not allow such a big change in the
+    base documents of the DNS. Working on this project will probably require a
+    rechartering of the group, or the creation of a new working
+    group. It could be a BoF at IETF 99 in Prague.</t>
+  </section>
+
+  <section anchor="choices" title="The choices">
+    <t>Here are the proposed choices for the project:
+    <list>
+      <t>No change in the protocol (like it was done for the SMTP or
+      HTTP RFC revisions). Software which was compliant should stay
+      compliant. This goal is not completely realistic: ambiguity in
+      original RFCs (for instance for ENTs) may result in
+      difficulties.</t>
+      <t>We use the RFCs on DNS which are on the Standards track.</t>
+      <t>Use <xref target="RFC2119"/> and <xref target="RFC2606"/>.</t>
+      <t>DNSSEC will be left alone (<xref target="RFC4034"/> and
+      friends are fine).</t>
+      <t>The terminology will be based on <xref
+      target="I-D.ietf-dnsop-terminology-bis"/>.</t>
+      <t>The goal of the new RFCs will be to describe the protocol,
+      not the operational practices. Best practices like TODO
+      Wallström draft are out of scope.</t>
+    </list></t>
+  </section>
+
+  <section anchor="open" title="Open questions">
+    <t>Here are some issues to address before starting the real work:
+    <list>
+      <t>Should we use the definition of domain names in <xref target="I-D.lewis-domain-names"/>?</t>
+      <t>Some RFCs may be integrated in the new RFCs, or could be left
+      alone because they are not mandatory for understanding the
+      DNS but they are so widely useful that one could argue they are
+      part of the base DNS. This is the case with <xref
+      target="RFC1996"/> or <xref target="RFC2845"/>.</t>
+      <t>Should we integrate <xref target="RFC7816"/> (currently experimental)?</t>
+    </list></t>
+  </section>
+  
+<section title="IANA Considerations">
+<t>None.</t>
+</section>
+
+<section anchor="security" title="Security Considerations">
+<t>None.</t>
+</section>
+
+<section title="Acknowledgments">
+<t>Obvsiously to Paul Mockapetris, for inventing the DNS, and writing
+the current RFCs.</t>
+</section>
+
+</middle>
+
+<back>
+
+<references title='Normative References'>
+  &rfc1034;
+  &rfc1035;
+  &rfc2119;
+  &rfc2606;
+  &I-D.ietf-dnsop-terminology-bis;
+</references>
+
+<references title='Informative References'>
+  &rfc1996;
+  &rfc5321;
+  &rfc5322;
+  &rfc7230;
+  &rfc7766;
+  &rfc7816;
+  &rfc8020;
+</references> 
+
+</back>
+
+</rfc>
+
+
+
