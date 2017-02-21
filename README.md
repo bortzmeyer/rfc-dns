@@ -4,11 +4,11 @@ Make DNS RFCs up-to-date again
 ## Important warning
 
 This project is at a very preliminary stage. Nothing substantial is
-done yet. No real decision is taken. Do not exoect anything.
+done yet. No real decision is taken. Do not expect anything.
 
 ## Goal
 
-The idea is to explore the possibility of updating thee official RFCs
+The idea is to explore the possibility of updating the official RFCs
 for DNS, RFC 1034 and 1035.
 
 ## License

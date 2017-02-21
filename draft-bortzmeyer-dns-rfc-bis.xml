@@ -2,21 +2,38 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY rfc1034 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1034.xml">
 <!ENTITY rfc1035 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1035.xml">
+<!ENTITY rfc1996 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1996.xml">
 <!ENTITY rfc2119 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc2181 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2181.xml">
 <!ENTITY rfc2606 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2606.xml">
+<!ENTITY rfc2845 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.2845.xml">
+<!ENTITY rfc4034 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.4034.xml">
+<!ENTITY rfc5321 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.5321.xml">
+<!ENTITY rfc5322 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.5322.xml">
+<!ENTITY rfc6891 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.6891.xml">
+<!ENTITY rfc7230 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7230.xml">
+<!ENTITY rfc7766 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7766.xml">
 <!ENTITY rfc7816 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7816.xml">
 <!ENTITY rfc8020 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8020.xml">
+<!ENTITY I-D.lewis-domain-names SYSTEM
+"http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.lewis-domain-names.xml">
 <!ENTITY I-D.ietf-dnsop-terminology-bis SYSTEM
 "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dnsop-terminology-bis.xml">
 ]>
 <rfc docName="draft-bortzmeyer-dns-rfc-bis-00-BETA"
-     category="std" ipr="trust200902">
+     category="info" ipr="trust200902">
 <?rfc toc="yes"?>
 <?rfc strict="yes"?>
 <front>
@@ -33,10 +50,11 @@ with new and up-to-date documents. It describes the goal, the method
 and the main choices. The RFC-bis documents themselves are separate
 documents, not yet published.</t>
   <t>It is not intended to be published as a RFC.</t>
-<t>REMOVE BEFORE PUBLICATION: this document should be discussed in the
+<t>This document should be discussed in the
 IETF DNSOP group, through its mailing list, as long as there is no
 chartered working group for this project. The
-source of the document, as well as a list of open issues, is currently
+source of the document, as well as a list of open issues (but most
+issues are labelled "TODO" in the drafts), is currently
 kept <eref
 target="https://github.com/bortzmeyer/rfc-dns">at Github</eref>.</t>
 </abstract>
@@ -105,7 +123,8 @@ target="https://github.com/bortzmeyer/rfc-dns">at Github</eref>.</t>
       alone because they are not mandatory for understanding the
       DNS but they are so widely useful that one could argue they are
       part of the base DNS. This is the case with <xref
-      target="RFC1996"/> or <xref target="RFC2845"/>.</t>
+      target="RFC1996"/> or <xref target="RFC2845"/> and of course
+      with <xref target="RFC6891"/>.</t>
       <t>Should we integrate <xref target="RFC7816"/> (currently experimental)?</t>
     </list></t>
   </section>
@@ -119,7 +138,7 @@ target="https://github.com/bortzmeyer/rfc-dns">at Github</eref>.</t>
 </section>
 
 <section title="Acknowledgments">
-<t>Obvsiously to Paul Mockapetris, for inventing the DNS, and writing
+<t>Obviously to Paul Mockapetris, for inventing the DNS, and writing
 the current RFCs.</t>
 </section>
 
@@ -137,12 +156,17 @@ the current RFCs.</t>
 
 <references title='Informative References'>
   &rfc1996;
+  &rfc2181;
+  &rfc2845;
+  &rfc4034;
   &rfc5321;
   &rfc5322;
+  &rfc6891;
   &rfc7230;
   &rfc7766;
   &rfc7816;
   &rfc8020;
+  &I-D.lewis-domain-names;
 </references> 
 
 </back>
