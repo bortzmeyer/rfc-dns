@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rfc submissionType="independent" docName="draft-bortzmeyer-dns-1034bis-00BETA" obsoletes="1034 1101 1183 1982 2181 2308 4343 4592 5936 7719 8020">
+<rfc submissionType="independent" docName="draft-bortzmeyer-dns-1034bis-00BETA" obsoletes="1034 1101 1183 1982 2181 2308 3597 4343 4592 5936 7719 8020">
 
   <front><title>Domain names and Domain Name System (DNS) - Concepts and Facilities</title>
   <author initials="S." surname="Bortzmeyer" fullname="Stéphane Bortzmeyer">
@@ -275,6 +275,7 @@ server and the cache managed by the resolver.
   <t>TODO : RFCs DNSSEC, what did they update in RFC 1034 (base DNS protocol)?</t>
   <t>TODO RFC 2181 : lots of things to change </t>
   <t>TODO RFC 2308 about negative caching</t>
+  <t>TODO RFC 3597 unknown RR types</t>
   <t>TODO RFC 4343 : clarification on case sensitivity</t>
   <t>TODO RFC 4592 about wildcards</t>
   <t>TODO RFC 5936 on zone transfers</t>
