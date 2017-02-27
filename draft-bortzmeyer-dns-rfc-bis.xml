@@ -23,6 +23,8 @@
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6891.xml">
 <!ENTITY rfc7230 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7230.xml">
+<!ENTITY rfc7414 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7414.xml">
 <!ENTITY rfc7766 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7766.xml">
 <!ENTITY rfc7816 SYSTEM
@@ -33,6 +35,8 @@
 "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.lewis-domain-names.xml">
 <!ENTITY I-D.ietf-dnsop-terminology-bis SYSTEM
 "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-dnsop-terminology-bis.xml">
+<!ENTITY I-D.wallstrom-dnsop-dns-delegation-requirements SYSTEM
+"http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.wallstrom-dnsop-dns-delegation-requirements.xml">
 ]>
 <rfc docName="draft-bortzmeyer-dns-rfc-bis-00-BETA"
      category="info" ipr="trust200902">
@@ -82,7 +86,10 @@ target="https://github.com/bortzmeyer/rfc-dns">at Github</eref>.</t>
     solid and modern specification. This is the case with SMTP (<xref
     target="RFC5321"/>), the Internet Message Format (<xref
     target="RFC5322"/>) and HTTP (<xref target="RFC7230"/> and
-    friends). It is time to do the same for the DNS.</t>
+    friends). It is time to do the same for the DNS. (We can also note
+    that TCP did not follow the same way, instead working on
+    something simpler, a roadmap of important RFCs, the <xref
+    target="RFC7414"/>. This project is more ambituous. TODO more explanations)</t>
     <t>The goal is therefore to produce two documents, 1034-bis and 1035-bis which will
       obsolete <xref target="RFC1034"/> and <xref target="RFC1035"/>,
       as well as the various RFCs that patch them (such as <xref
@@ -106,20 +113,25 @@ target="https://github.com/bortzmeyer/rfc-dns">at Github</eref>.</t>
       original RFCs (for instance for ENTs) may result in
       difficulties.</t>
       <t>We use the RFCs on DNS which are on the Standards track.</t>
-      <t>Use <xref target="RFC2119"/> and <xref target="RFC2606"/>.</t>
+      <t>We use the rules of <xref target="RFC2119"/> and <xref target="RFC2606"/>.</t>
       <t>DNSSEC will be left alone (<xref target="RFC4034"/> and
       friends are fine).</t>
       <t>The terminology will be based on <xref
       target="I-D.ietf-dnsop-terminology-bis"/>.</t>
       <t>The goal of the new RFCs will be to describe the protocol,
-      not the operational practices. Best practices like TODO
-      Wallström draft are out of scope.</t>
+      not the operational practices. Best practices like <xref
+      target="I-D.wallstrom-dnsop-dns-delegation-requirements"/> are out of scope.</t>
     </list></t>
   </section>
 
   <section anchor="open" title="Open questions">
     <t>Here are some issues to address before starting the real work:
     <list>
+      <t>Should we tart from the actual text of RFCs 1034 and 1035 or
+      should we rewrite from scratch? The current text is far from the
+      current style of RFCs and difficult to work with. But rewriting
+      from a clean slate makes more difficult to guarantee the exact
+      same protocol.</t>
       <t>Should we use the definition of domain names in <xref target="I-D.lewis-domain-names"/>?</t>
       <t>Some RFCs may be integrated in the new RFCs, or could be left
       alone because they are not mandatory for understanding the
@@ -166,10 +178,12 @@ the current RFCs.</t>
   &rfc5322;
   &rfc6891;
   &rfc7230;
+  &rfc7414;
   &rfc7766;
   &rfc7816;
   &rfc8020;
   &I-D.lewis-domain-names;
+  &I-D.wallstrom-dnsop-dns-delegation-requirements;
 </references> 
 
 </back>

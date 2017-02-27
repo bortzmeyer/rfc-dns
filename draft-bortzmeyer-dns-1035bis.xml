@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rfc submissionType="independent" docName="draft-bortzmeyer-dns-1035bis-00BETA" obsoletes="1035 1995 1996 2136 2845 3425 6604 6891 7766">
+<rfc submissionType="independent" docName="draft-bortzmeyer-dns-1035bis-00BETA" obsoletes="1035 1995 1996 2136 2845 3425 5625 6604 6891 7766">
   <front><title>Domain names and Domain Name System (DNS) - Implementation and specification</title>
   <author initials="S." surname="Bortzmeyer" fullname="Stéphane Bortzmeyer">
   <organization>AFNIC</organization><address><email>bortzmeyer+ietf@nic.fr</email><uri>https://www.afnic.fr/</uri></address></author>
@@ -43,6 +43,7 @@ primarily pedagogical.  Distribution of this memo is unlimited.
   <t>TODO RFC 2136 (dynamic updates) add it here or leave it alone? If so, remove from the "obsoletes" attribute</t>
   <t>TODO RFC 2845 (TSIG) add it here or leave it alone? If so, remove from the "obsoletes" attribute</t>
   <t>TODO RFC 3425 (obsoleting IQUERY) Text was removed from the document</t>
+  <t>TODO RFC 5625 on DNS proxies</t>
   <t>TODO RFC 6604 (RCODE for DNAME and CNAME chains)</t>
   <t>TODO RFC 6891 (EDNS) Integrate in the base RFCS?</t>
   <t>TODO RFC 7766 (TCP)</t>
