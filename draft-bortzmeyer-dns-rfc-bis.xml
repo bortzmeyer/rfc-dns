@@ -29,6 +29,8 @@
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7766.xml">
 <!ENTITY rfc7816 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7816.xml">
+<!ENTITY rfc7991 SYSTEM
+"http://xml.resource.org/public/rfc/bibxml/reference.RFC.7991.xml">
 <!ENTITY rfc8020 SYSTEM
 "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8020.xml">
 <!ENTITY I-D.lewis-domain-names SYSTEM
@@ -127,8 +129,9 @@ target="https://github.com/bortzmeyer/rfc-dns">at Github</eref>.</t>
   <section anchor="open" title="Open questions">
     <t>Here are some issues to address before starting the real work:
     <list>
-      <t>Should we tart from the actual text of RFCs 1034 and 1035 or
-      should we rewrite from scratch? The current text is far from the
+      <t>Should we start from the actual text of RFCs 1034 and 1035 (a
+      project we can call "DNS 2.1") or
+      should we rewrite from scratch ("DNS 2.2"?)? The current text is far from the
       current style of RFCs and difficult to work with. But rewriting
       from a clean slate makes more difficult to guarantee the exact
       same protocol.</t>
@@ -142,7 +145,14 @@ target="https://github.com/bortzmeyer/rfc-dns">at Github</eref>.</t>
       <t>Should we integrate <xref target="RFC7816"/> (currently experimental)?</t>
     </list></t>
   </section>
-  
+
+  <section anchor="misc" title="Miscellaneous">
+    <t>The project currently uses the new XML format of <xref
+    target="RFC7991"/>. There are currently no tools for that, but we
+    hope they will appear before the end of the project (which is
+    expected to take time).</t>
+  </section>
+
 <section title="IANA Considerations">
 <t>None.</t>
 </section>
@@ -181,6 +191,7 @@ the current RFCs.</t>
   &rfc7414;
   &rfc7766;
   &rfc7816;
+  &rfc7991;
   &rfc8020;
   &I-D.lewis-domain-names;
   &I-D.wallstrom-dnsop-dns-delegation-requirements;
