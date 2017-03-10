@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rfc submissionType="independent" docName="draft-bortzmeyer-dns-1035bis-00BETA" obsoletes="1035 1995 1996 2136 2845 3425 5625 6604 6891 7766">
+<rfc submissionType="independent" docName="draft-bortzmeyer-dns-1035bis-00BETA" obsoletes="1035 1995 1996 2136 2845 3425 3596 5625 6604 6891 7766">
   <front><title>Domain names and Domain Name System (DNS) - Implementation and specification</title>
   <author initials="S." surname="Bortzmeyer" fullname="Stéphane Bortzmeyer">
   <organization>AFNIC</organization><address><email>bortzmeyer+ietf@nic.fr</email><uri>https://www.afnic.fr/</uri></address></author>
@@ -43,22 +43,21 @@ primarily pedagogical.  Distribution of this memo is unlimited.
   <t>TODO RFC 2136 (dynamic updates) add it here or leave it alone? If so, remove from the "obsoletes" attribute</t>
   <t>TODO RFC 2845 (TSIG) add it here or leave it alone? If so, remove from the "obsoletes" attribute</t>
   <t>TODO RFC 3425 (obsoleting IQUERY) Text was removed from the document</t>
+  <t>TODO RFC 3596 IPv6 Describes AAAA and ip6.arpa</t>
   <t>TODO RFC 5625 on DNS proxies</t>
   <t>TODO RFC 6604 (RCODE for DNAME and CNAME chains)</t>
   <t>TODO RFC 6891 (EDNS) Integrate in the base RFCS?</t>
   <t>TODO RFC 7766 (TCP)</t>
 </section>
 
-  <section title="TODO">
-    <t>
-  2. INTRODUCTION
-
-2.1. Overview
-
+  <section title="Introduction">
+    <section title="Overview">
+<t>
 The goal of domain names is to provide a mechanism for naming resources
 in such a way that the names are usable in different hosts, networks,
 protocol families, internets, and administrative organizations.
-
+</t>
+<t>
 From the user's point of view, domain names are useful as arguments to a
 local agent, called a resolver, which retrieves information associated
 with the domain name.  Thus a user might ask for the host address or
@@ -68,7 +67,8 @@ query type is passed to the resolver with the domain name.  To the user,
 the domain tree is a single information space; the resolver is
 responsible for hiding the distribution of data among name servers from
 the user.
-
+</t>
+<t>
 From the resolver's point of view, the database that makes up the domain
 space is distributed among various name servers.  Different parts of the
 domain space are stored in different name servers, although a particular
@@ -81,7 +81,8 @@ referrals, resolvers learn the identities and contents of other name
 servers.  Resolvers are responsible for dealing with the distribution of
 the domain space and dealing with the effects of name server failure by
 consulting redundant databases in other servers.
-
+</t>
+<t>
 Name servers manage two kinds of data.  The first kind of data held in
 sets called zones; each zone is the complete database for a particular
 "pruned" subtree of the domain space.  This data is called
@@ -92,13 +93,15 @@ kind of data is cached data which was acquired by a local resolver.
 This data may be incomplete, but improves the performance of the
 retrieval process when non-local data is repeatedly accessed.  Cached
 data is eventually discarded by a timeout mechanism.
-
+</t>
+<t>
 This functional structure isolates the problems of user interface,
 failure recovery, and distribution in the resolvers and isolates the
 database update and refresh problems in the name servers.
-
-2.2. Common configurations
-
+</t>
+    </section> <!-- Overview -->
+<section title="Common configurations">
+<t>
 A host can participate in the domain name system in a number of ways,
 depending on whether the host runs programs that retrieve information
 from the domain system, name servers that answer queries from other
@@ -129,14 +132,14 @@ system.  Less capable hosts may choose to implement the resolver as a
 subroutine to be linked in with every program that needs its services.
 Resolvers answer user queries with information they acquire via queries
 to foreign name servers and the local cache.
-
-Note that the resolver may have to make several queries to several
+</t>
+<t>Note that the resolver may have to make several queries to several
 different foreign name servers to answer a particular user query, and
 hence the resolution of a user query may involve several network
 accesses and an arbitrary amount of time.  The queries to foreign name
 servers and the corresponding responses have a standard format described
-in this memo, and may be datagrams.
-
+in this memo, and may be datagrams. TODO and TCP?</t>
+<t>
 Depending on its capabilities, a name server could be a stand alone
 program on a dedicated machine or a process or processes on a large
 timeshared host.  A simple configuration might be:
@@ -156,7 +159,8 @@ timeshared host.  A simple configuration might be:
 Here a primary name server acquires information about one or more zones
 by reading master files from its local file system, and answers queries
 about those zones that arrive from foreign resolvers.
-
+</t>
+<t>
 The DNS requires that all zones be redundantly supported by more than
 one name server.  Designated secondary servers can acquire zones and
 check for updates from the primary server using the zone transfer
@@ -185,9 +189,11 @@ virtual circuit to a foreign name server to acquire a copy of a zone or
 to check that an existing copy has not changed.  The messages sent for
 these maintenance activities follow the same form as queries and
 responses, but the message sequences are somewhat different.
-
+</t>
+<t>
 The information flow in a host that supports all aspects of the domain
-name system is shown below:
+name system is shown below: TODO this one is really strange, with this
+"shared database"
 <![CDATA[
                  Local Host                        |  Foreign
                                                    |
@@ -265,31 +271,32 @@ known to perform that service:
 ]]>
 In any case, note that domain components are always replicated for
 reliability whenever possible.
-
-2.3. Conventions
-
+</t>
+</section> <!-- Common configurations -->
+<section title="Conventions">
+<t>
 The domain system has several conventions dealing with low-level, but
 fundamental, issues.  While the implementor is free to violate these
 conventions WITHIN HIS OWN SYSTEM, he must observe these conventions in
 ALL behavior observed from other hosts.
-
-2.3.1. Preferred name syntax
-
-The DNS specifications attempt to be as general as possible in the rules
+</t>
+<section title="Preferred name syntax">
+  <t>TODO this one is touchy. Use <xref target="RFC2181"/>.</t>
+<t>The DNS specifications attempt to be as general as possible in the rules
 for constructing domain names.  The idea is that the name of any
 existing object can be expressed as a domain name with minimal changes.
 However, when assigning a domain name for an object, the prudent user
 will select a name which satisfies both the rules of the domain system
 and any existing rules for the object, whether these rules are published
-or implied by existing programs.
-
+or implied by existing programs.</t>
+<t>
 For example, when naming a mail domain, the user should satisfy both the
-rules of this memo and those in RFC-822.  When creating a new host name,
+rules of this memo and those in RFC-822 TODO upgrade.  When creating a new host name,
 the old rules for HOSTS.TXT should be followed.  This avoids problems
 when old software is converted to use domain names.
-
+</t>
+<t>
 The following syntax will result in fewer problems with many
-
 applications that use domain names (e.g., mail, TELNET TODO more modern example).</t>
 
 <sourcecode>
@@ -325,10 +332,11 @@ restrictions on the length.  Labels must be 63 characters or less.
 For example, the following strings identify hosts in the Internet:
 
 A.ISI.EDU XX.LCS.MIT.EDU SRI-NIC.ARPA
+</t>
+</section>
+<section title="Data Transmission Order">
 
-2.3.2. Data Transmission Order
-
-The order of transmission of the header and data described in this
+<t>The order of transmission of the header and data described in this
 document is resolved to the octet level.  Whenever a diagram shows a
 group of octets, the order of transmission of those octets is the normal
 order in which they are read in English.  For example, in the following
@@ -358,43 +366,41 @@ Similarly, whenever a multi-octet field represents a numeric quantity
 the left most bit of the whole field is the most significant bit.  When
 a multi-octet quantity is transmitted the most significant octet is
 transmitted first.
-
-2.3.3. Character Case
-
-For all parts of the DNS that are part of the official protocol, all
+</t>
+</section>
+<section title="Character Case">
+<t>For all parts of the DNS that are part of the official protocol, all
 comparisons between character strings (e.g., labels, domain names, etc.)
-are done in a case-insensitive manner.  At present, this rule is in
+are done in a case-insensitive manner TODO mention the case of 8bits labels?.  At present, this rule is in
 force throughout the domain system without exception.  However, future
 additions beyond current usage may need to use the full binary octet
 capabilities in names, so attempts to store domain names in 7-bit ASCII
 or use of special bytes to terminate labels, etc., should be avoided.
-
-When data enters the domain system, its original case should be
+</t>
+<t>When data enters the domain system, its original case should be
 preserved whenever possible.  In certain circumstances this cannot be
 done.  For example, if two RRs are stored in a database, one at x.y and
 one at X.Y, they are actually stored at the same place in the database,
 and hence only one casing would be preserved.  The basic rule is that
 case can be discarded only when data is used to define structure in a
 database, and two names are identical when compared in a case
-insensitive manner.
-
-Loss of case sensitive data must be minimized.  Thus while data for x.y
+insensitive manner.</t>
+<t>Loss of case sensitive data must be minimized.  Thus while data for x.y
 and X.Y may both be stored under a single location x.y or X.Y, data for
 a.x and B.X would never be stored under A.x, A.X, b.x, or b.X.  In
 general, this preserves the case of the first label of a domain name,
 but forces standardization of interior node labels.
-
-Systems administrators who enter data into the domain database should
+</t>
+<t>Systems administrators who enter data into the domain database should
 take care to represent the data they supply to the domain system in a
 case-consistent manner if their system is case-sensitive.  The data
 distribution system in the domain system will ensure that consistent
-representations are preserved.
-
-2.3.4. Size limits
-
-Various objects and parameters in the DNS have size limits.  They are
+representations are preserved.</t>
+</section>
+<section title="Size limits">
+<t>Various objects and parameters in the DNS have size limits.  They are
 listed below.  Some could be easily changed, others are more
-fundamental.
+fundamental. TODO which?
 
 labels          63 octets or less
 
@@ -402,12 +408,13 @@ names           255 octets or less
 
 TTL             positive values of a signed 32 bit number.
 
-UDP messages    512 octets or less
-
-3. DOMAIN NAME SPACE AND RR DEFINITIONS
-
-3.1. Name space definitions
-
+UDP messages    512 octets or less TODO upgrade
+</t>
+</section>
+</section> <!-- Conventions -->
+<section title="Domain Name space and RR definitions">
+<section title="Name space definitions">
+<t>
 Domain names in messages are expressed in terms of a sequence of labels.
 Each label is represented as a one octet length field followed by that
 number of octets.  Since every domain name ends with the null label of
@@ -415,24 +422,27 @@ the root, a domain name is terminated by a length byte of zero.  The
 high order two bits of every length octet must be zero, and the
 remaining six bits of the length field limit the label to 63 octets or
 less.
-
+</t>
+<t>
 To simplify implementations, the total length of a domain name (i.e.,
 label octets and label length octets) is restricted to 255 octets or
 less.
-
+</t>
+<t>
 Although labels can contain any 8 bit values in octets that make up a
-label, it is strongly recommended that labels follow the preferred
+label, it is strongly TODO MUST, SHOULD? recommended that labels follow the preferred
 syntax described elsewhere in this memo, which is compatible with
 existing host naming conventions.  Name servers and resolvers must
-compare labels in a case-insensitive manner (i.e., A=a), assuming ASCII
+compare labels in a case-insensitive manner (i.e., A=a), assuming
+ASCII TODO big assumption endTODO
 with zero parity.  Non-alphabetic codes must match exactly. TODO RFC 2181
-
-3.2. RR definitions
-
-3.2.1. Format
-
+</t>
+</section> <!-- Name space definitions -->
+<section title="RR definitions">
+<section title="Format">
+<t>
 All RRs have the same top level format shown below:
-
+TODO sourcecode
                                     1  1  1  1  1  1
       0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5
     +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -462,7 +472,8 @@ NAME            an owner name, i.e., the name of the node to which this
 
 TYPE            two octets containing one of the RR TYPE codes.
 
-CLASS           two octets containing one of the RR CLASS codes.
+CLASS           two octets containing one of the RR CLASS codes. TODO:
+revive the "classes are deprecated"? endTODO
 
 TTL             a 32 bit signed integer that specifies the time interval
                 that the resource record may be cached before the source
@@ -480,11 +491,14 @@ RDLENGTH        an unsigned 16 bit integer that specifies the length in
 RDATA           a variable length string of octets that describes the
                 resource.  The format of this information varies
                 according to the TYPE and CLASS of the resource record.
-
-3.2.2. TYPE values
-
+</t>
+</section>
+<section title="TYPE values">
+<t>
 TYPE fields are used in resource records.  Note that these types are a
 subset of QTYPEs.
+TODO pointer to the IANA registry instead, plus rules for registration
+in <xref target="RFC5226"/> language. What is the policy for RR types???
 
 TYPE            value and meaning
 
@@ -519,13 +533,14 @@ MINFO           14 mailbox or mail list information
 MX              15 mail exchange
 
 TXT             16 text strings
-
-3.2.3. QTYPE values
-
+</t>
+</section>
+<section title="QTYPE values">
+<t>
 QTYPE fields appear in the question part of a query.  QTYPES are a
 superset of TYPEs, hence all TYPEs are valid QTYPEs.  In addition, the
 following QTYPEs are defined:
-
+TODO IANA registry for QTYPES
 
 AXFR            252 A request for a transfer of an entire zone
 
@@ -536,9 +551,11 @@ MAILB           253 A request for mailbox-related records (MB, MG or MR)
 MAILA           254 A request for mail agent RRs (Obsolete - see MX)
 
 *               255 A request for all records
-
-3.2.4. CLASS values
-
+</t>
+</section>
+<section title="CLASS values">
+  <t>TODO IANA registry for classes</t>
+<t>
 CLASS fields appear in resource records.  The following CLASS mnemonics
 and values are defined:
 
@@ -550,29 +567,31 @@ CS              2 the CSNET class (Obsolete - used only for examples in
 CH              3 the CHAOS class
 
 HS              4 Hesiod [Dyer 87]
-
-3.2.5. QCLASS values
-
-QCLASS fields appear in the question section of a query.  QCLASS values
+</t>
+</section>
+<section title="QCLASS values">
+  <t>TODO IANA registry for QCLASS</t>
+  <t>QCLASS fields appear in the question section of a query.  QCLASS values
 are a superset of CLASS values; every CLASS is a valid QCLASS.  In
 addition to CLASS values, the following QCLASSes are defined:
 
 *               255 any class
-
-3.3. Standard RRs
-
-The following RR definitions are expected to occur, at least
+</t>
+</section>
+<section title="Standard RRs">
+<t>The following RR definitions are expected to occur, at least
 potentially, in all classes.  In particular, NS, SOA, CNAME, and PTR
 will be used in all classes, and have the same format in all classes.
 Because their RDATA format is known, all domain names in the RDATA
-section of these RRs may be compressed.
-
+section of these RRs may be compressed.</t>
+<t>
 &lt;domain-name> is a domain name represented as a series of labels, and
 terminated by a label with zero length.  &lt;character-string> is a single
 length octet followed by that number of characters.  &lt;character-string>
 is treated as binary information, and can be up to 256 characters in
 length (including the length octet).
 
+TODO redraw these figures?
 
 3.3.1. CNAME RDATA format
 
@@ -787,7 +806,7 @@ NSDNAME         A &lt;domain-name> which specifies a host which should be
                 authoritative for the specified class and domain.
 
 NS records cause both the usual additional section processing to locate
-a type A record, and, when used in a referral, a special search of the
+a type A record TODO replace all "type A" with "type address"? endTODO, and, when used in a referral, a special search of the
 zone in which they reside for glue information.
 
 The NS RR states that the named host should be expected to have a zone
@@ -968,6 +987,8 @@ or decimal numbers.
 
 3.5. IN-ADDR.ARPA domain
 
+TODO ip6.arpa <xref target="RFC3596"/>
+
 The Internet uses a special domain to support gateway location and
 Internet address to host mapping.  Other classes may employ a similar
 strategy in other domains.  The intent of this domain is to provide a
@@ -1115,8 +1136,11 @@ a QTYPE of MF, MD, or MAILA (which matched both).  The redesigned
 service used a single type (MX) with a "preference" value in the RDATA
 section which can order different RRs.  However, if any MX RRs are found
 in the cache, then all should be there.
-
-4. MESSAGES
+</t>
+</section>
+</section>
+<section title="Messages">
+<t>
 
 4.1. Format
 
@@ -1513,9 +1537,11 @@ Several connection management policies are recommended: TODO RFC 7766
      Since the server would be unable to answer queries anyway, a
      unilateral close or reset may be used instead of a graceful
      close.
-
-5. MASTER FILES
-
+</t>
+</section>
+<section title="Master files">
+<t>TODO explain that they are not mandatory</t>
+<t>
 Master files are text files that contain RRs in text form.  Since the
 contents of a zone can be expressed in the form of a list of RRs a
 master file is most often used to define a zone, though it can be used
@@ -1680,10 +1706,10 @@ Where the file &lt;SUBSYS>ISI-MAILBOXES.TXT is:
 ]]>
 Note the use of the \ character in the SOA RR to specify the responsible
 person mailbox "Action.domains@E.ISI.EDU".
-
-
-6. NAME SERVER IMPLEMENTATION
-
+</t>
+</section>
+<section title="Name server implementation">
+<t>
 6.1. Architecture
 
 The optimal structure for the name server will depend on the host
@@ -1838,10 +1864,10 @@ the connection on which the zone transfer is taking place.
 
 The optional completion services described in RFC-882 and RFC-883 have
 been deleted.  Redesigned services may become available in the future.
-
-
-7. RESOLVER IMPLEMENTATION
-
+</t>
+</section>
+<section title="Resolver implementation">
+<t>
 The top levels of the recommended resolver algorithm are discussed in
 [RFC-1034].  This section discusses implementation details assuming the
 database structure suggested in the name server implementation section
@@ -2067,9 +2093,11 @@ already existing RRs.  Depending on the circumstances, either the data
 in the response or the cache is preferred, but the two should never be
 combined.  If the data in the response is from authoritative data in the
 answer section, it is always preferred.
-
-8. MAIL SUPPORT
-
+</t>
+</section>
+<section title="Mail support">
+  <t>TODO: should it be delegated to SMTP RFCs?</t>
+  <t>
 The domain system defines a standard for mapping mailboxes into domain
 names, and two methods for using the mailbox information to derive mail
 routing information.  The first method is called mail exchange binding
@@ -2182,6 +2210,8 @@ New fields may be added to this RR in the future.
 
 
 </t>
+</section>
+</section>
 </section>
 </middle>
 
